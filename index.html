@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grupo D Todo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Grupo D Todo reúne a Distribuidora D Todo, productores avícolas y mayoristas de alimentos, y a Transporte D Todo, fletes y distribución con rastreo en línea en todo El Salvador.">
+<meta name="theme-color" content="#121a26">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://grupodtodo.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_SV">
+<meta property="og:site_name" content="Grupo D Todo">
+<meta property="og:title" content="Grupo D Todo · Producimos, abastecemos y movemos">
+<meta property="og:description" content="Dos empresas, un solo grupo: Distribuidora D Todo y Transporte D Todo. Elige a dónde quieres ir.">
+<meta property="og:url" content="https://grupodtodo.com/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23121a26'/%3E%3Ctext x='32' y='42' text-anchor='middle' fill='%23fff' font-family='Arial,Helvetica,sans-serif' font-size='32' font-weight='800'%3ED%3C/text%3E%3Crect x='14' y='50' width='18' height='4' rx='2' fill='%23F28500'/%3E%3Crect x='32' y='50' width='18' height='4' rx='2' fill='%231877d6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: una cabecera corta del grupo y dos "puertas" lado a lado, una por empresa;
+   cada puerta lleva el color y el logotipo de su propia página. */
+:root{
+  --bg:#f7f5f1;          /* papel cálido neutro entre el crema de la distribuidora y el blanco azulado de transporte */
+  --bg-2:#ffffff;
+  --fg:#121a26;
+  --fg-2:#4b5563;
+  --fg-3:#8a93a3;
+  --line:#e4e0d8;
+  --ink:#121a26;         /* banda oscura del grupo */
+  --ink-fg:#ffffff;
+  --ink-fg-2:#aab3c2;
+  --dist:#F28500;        /* Distribuidora D Todo */
+  --dist-dark:#c25e00;
+  --dist-soft:#fff1e2;
+  --trans:#1877d6;       /* Transporte D Todo */
+  --trans-dark:#004d99;
+  --trans-soft:#e9f2fd;
+  --ok:#22c55e;
+  --font-display:'Barlow Condensed','Oswald','Arial Narrow',Impact,sans-serif;
+  --font-body:'Plus Jakarta Sans','Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --gutter-l:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e141d;--bg-2:#151d29;--fg:#f3f4f6;--fg-2:#c3cad6;--fg-3:#7f8a9b;--line:#263142;
+    --ink:#0a0f17;--ink-fg:#ffffff;--ink-fg-2:#9aa5b6;
+    --dist-soft:#2a1a08;--trans-soft:#0c1f36;color-scheme:dark
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e141d;--bg-2:#151d29;--fg:#f3f4f6;--fg-2:#c3cad6;--fg-3:#7f8a9b;--line:#263142;
+  --ink:#0a0f17;--ink-fg:#ffffff;--ink-fg-2:#9aa5b6;
+  --dist-soft:#2a1a08;--trans-soft:#0c1f36;color-scheme:dark
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+:focus-visible{outline:3px solid var(--trans);outline-offset:3px}
+.puerta--dist :focus-visible{outline-color:var(--dist)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+
+/* Cabecera del grupo */
+.top{background:var(--ink);color:var(--ink-fg)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{display:flex;flex-direction:column;line-height:1}
+.logo .eyebrow{font-size:10px;letter-spacing:.42em;font-weight:700;text-transform:uppercase;color:var(--ink-fg-2);padding-left:2px}
+.logo .name{font-family:var(--font-display);font-size:30px;font-weight:800;letter-spacing:.01em;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.logo .bars{display:inline-flex;gap:3px}
+.logo .bars i{display:block;width:16px;height:5px;border-radius:3px}
+.logo .bars i:first-child{background:var(--dist)}
+.logo .bars i:last-child{background:var(--trans)}
+.top .pais{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-fg-2)}
+.top .pais b{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulso 1.8s infinite}
+@keyframes pulso{70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+
+/* Hero: pregunta + dos puertas */
+.hero{padding-block:clamp(36px,6vw,72px) clamp(28px,4vw,48px)}
+.hero h1{margin:0;font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(40px,7vw,92px);line-height:.95;letter-spacing:-.005em;text-wrap:balance;max-width:14ch}
+.hero p{margin:14px 0 0;max-width:58ch;font-size:clamp(16px,1.3vw,19px);color:var(--fg-2);text-wrap:pretty}
+.hero .pregunta{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
+.hero .pista{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.hero .pista svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.puertas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px;margin-top:clamp(28px,4vw,48px)}
+.puerta{position:relative;display:flex;flex-direction:column;gap:22px;min-height:460px;padding:clamp(24px,3vw,40px);border-radius:var(--radius);color:#fff;overflow:hidden;isolation:isolate;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.puerta:hover,.puerta:focus-within{transform:translateY(-6px)}
+.puerta--dist{background:linear-gradient(160deg,#ffa23d 0%,var(--dist) 45%,var(--dist-dark) 100%);box-shadow:0 20px 50px -20px rgba(242,133,0,.55)}
+.puerta--trans{background:linear-gradient(160deg,#2b8df0 0%,var(--trans) 45%,var(--trans-dark) 100%);box-shadow:0 20px 50px -20px rgba(24,119,214,.55)}
+.puerta--dist:hover{box-shadow:0 30px 60px -20px rgba(242,133,0,.7)}
+.puerta--trans:hover{box-shadow:0 30px 60px -20px rgba(24,119,214,.7)}
+.puerta .deco{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.9}
+.puerta .deco svg{position:absolute}
+.puerta .marca{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.puerta .marca svg{height:52px;width:auto;display:block}
+.puerta .tag{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.14);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);white-space:nowrap}
+.puerta h2{margin:auto 0 0;font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(34px,3.6vw,56px);line-height:.95;text-wrap:balance;max-width:16ch}
+.puerta .desc{margin:0;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:rgba(255,255,255,.9);max-width:46ch;text-wrap:pretty}
+.puerta .lineas{display:flex;flex-wrap:wrap;gap:8px}
+.puerta .lineas span{font-size:13px;font-weight:600;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12)}
+.puerta .pie{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:18px;border-top:1px solid rgba(255,255,255,.28)}
+.puerta .tel{display:flex;flex-direction:column;line-height:1.2;font-size:12px;color:rgba(255,255,255,.8)}
+.puerta .tel b{font-size:17px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;gap:10px;background:#fff;font-weight:800;font-size:16px;padding:16px 22px;border-radius:12px;transition:transform .2s,background .2s;white-space:nowrap}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.btn:hover svg{transform:translate(3px,-3px)}
+.puerta--dist .btn{color:var(--dist-dark)}
+.puerta--trans .btn{color:var(--trans-dark)}
+.puerta .btn:hover{background:#fff7ee}
+.puerta--trans .btn:hover{background:#eef5ff}
+.puerta>a.cubre{position:absolute;inset:0;z-index:2;border-radius:inherit}
+.puerta .pie{position:relative;z-index:3}
+
+/* El grupo */
+.grupo{padding-block:clamp(56px,7vw,100px);border-top:1px solid var(--line)}
+.grupo .cab{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(24px,4vw,64px);align-items:end}
+.eyebrow-s{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3)}
+.grupo h2{margin:10px 0 0;font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(34px,4.6vw,64px);line-height:.95;text-wrap:balance}
+.grupo h2 em{font-style:normal}
+.grupo h2 .d{color:var(--dist)}
+.grupo h2 .t{color:var(--trans)}
+.grupo .cab p{margin:0;font-size:17px;color:var(--fg-2);max-width:52ch;text-wrap:pretty}
+.cadena{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:clamp(28px,4vw,48px)}
+.paso{display:flex;flex-direction:column;gap:12px;padding:26px 24px;background:var(--bg-2)}
+.paso .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.paso .ic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.paso--d .ic{background:var(--dist-soft);color:var(--dist-dark)}
+.paso--t .ic{background:var(--trans-soft);color:var(--trans)}
+.paso--g .ic{background:var(--ink);color:var(--ink-fg)}
+.paso h3{margin:0;font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:24px;line-height:1}
+.paso p{margin:0;font-size:15px;color:var(--fg-2)}
+.paso small{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.paso--d small{color:var(--dist-dark)}
+.paso--t small{color:var(--trans)}
+.paso--g small{color:var(--fg-3)}
+
+/* Contacto */
+.contacto{padding-block:clamp(48px,6vw,80px);background:var(--ink);color:var(--ink-fg)}
+.contacto .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;align-items:start}
+.contacto h2{margin:0;font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(30px,3.6vw,48px);line-height:.95;text-wrap:balance}
+.contacto p{margin:10px 0 0;color:var(--ink-fg-2);max-width:40ch}
+.tarjeta{display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+.tarjeta .quien{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-fg-2)}
+.tarjeta .quien i{width:10px;height:10px;border-radius:3px;display:block}
+.tarjeta--d .quien i{background:var(--dist)}
+.tarjeta--t .quien i{background:var(--trans)}
+.tarjeta .num{font-family:var(--font-display);font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:#fff;user-select:all}
+.tarjeta .acciones{display:flex;flex-wrap:wrap;gap:8px}
+.tarjeta .acciones a{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);color:#fff;transition:background .2s,border-color .2s}
+.tarjeta .acciones a:hover{background:rgba(255,255,255,.1)}
+.tarjeta--d .acciones a.p{background:var(--dist);border-color:var(--dist)}
+.tarjeta--t .acciones a.p{background:var(--trans);border-color:var(--trans)}
+.tarjeta .acciones svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+footer{background:var(--ink);color:var(--ink-fg-2);border-top:1px solid rgba(255,255,255,.1)}
+footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:20px;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));font-size:13px}
+footer nav{display:flex;flex-wrap:wrap;gap:18px}
+footer nav a:hover{color:#fff}
+
+@media (max-width:640px){
+  .puerta{min-height:0}
+  .puerta h2{margin-top:8px}
+  .logo .name{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .puerta,.btn svg{transition:none}
+  .puerta:hover{transform:none}
+  .top .pais b{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Grupo D Todo">
+      <span class="eyebrow">Grupo</span>
+      <span class="name">D Todo <span class="bars" aria-hidden="true"><i></i><i></i></span></span>
+    </a>
+    <div class="pais"><b aria-hidden="true"></b>El Salvador · Cobertura nacional</div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="pregunta">
+      <div>
+        <h1>¿Qué necesita tu negocio hoy?</h1>
+        <p>Grupo D Todo reúne dos empresas con un mismo compromiso: que a tu negocio no le falte nada. Una produce y abastece. La otra lo mueve a donde haga falta. Elige a dónde quieres ir.</p>
+      </div>
+      <div class="pista">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        Dos puertas, un grupo
+      </div>
+    </div>
+
+    <div class="puertas">
+
+      <!-- DISTRIBUIDORA D TODO -->
+      <article class="puerta puerta--dist">
+        <div class="deco" aria-hidden="true">
+          <svg style="right:-60px;top:-80px;width:360px;height:360px;opacity:.22" viewBox="0 0 360 360"><circle cx="180" cy="180" r="170" fill="none" stroke="#fff" stroke-width="2"/><circle cx="180" cy="180" r="120" fill="none" stroke="#fff" stroke-width="2"/><circle cx="180" cy="180" r="70" fill="none" stroke="#fff" stroke-width="2"/></svg>
+          <svg style="left:-10px;bottom:-30px;width:70%;height:120px;opacity:.35" viewBox="0 0 400 120" preserveAspectRatio="none"><path d="M0 100 C 120 130, 280 120, 400 60" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <a class="cubre" href="https://distribuidora.grupodtodo.com" data-destino="distribuidora" aria-label="Ir a Distribuidora D Todo"></a>
+        <div class="marca">
+          <svg viewBox="0 0 160 56" fill="none" role="img" aria-label="Distribuidora D Todo">
+            <text x="2" y="10" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="8.6" font-weight="700" letter-spacing="3.4">DISTRIBUIDORA</text>
+            <text x="0" y="39" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="31" font-weight="800" letter-spacing="-1">D Todo</text>
+            <path d="M6 45 C 40 56, 92 56, 124 42" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M113 39 L126 41.5 L119 52" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="tag">Granja y bodega</span>
+        </div>
+        <h2>De nuestra granja directo a tu cocina.</h2>
+        <p class="desc">Huevos frescos de granja propia, harinas de trigo y arroz y aceites al por mayor. Abastecemos panaderías, pupuserías, restaurantes, hoteles y mayoristas con precio de productor.</p>
+        <div class="lineas"><span>Huevos de granja</span><span>Harinas</span><span>Aceites</span><span>Precio mayorista</span></div>
+        <div class="pie">
+          <div class="tel">Pedidos por WhatsApp<b>+503 7027 4503</b></div>
+          <a class="btn" href="https://distribuidora.grupodtodo.com" data-destino="distribuidora">Ir a Distribuidora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        </div>
+      </article>
+
+      <!-- TRANSPORTE D TODO -->
+      <article class="puerta puerta--trans">
+        <div class="deco" aria-hidden="true">
+          <svg style="right:-40px;top:-40px;width:420px;height:420px;opacity:.18" viewBox="0 0 420 420"><circle cx="210" cy="210" r="200" fill="none" stroke="#fff" stroke-width="2"/><circle cx="210" cy="210" r="140" fill="none" stroke="#fff" stroke-width="2"/><circle cx="210" cy="210" r="80" fill="none" stroke="#fff" stroke-width="2"/></svg>
+          <svg style="left:0;bottom:0;width:100%;height:140px;opacity:.45" viewBox="0 0 600 140" preserveAspectRatio="none"><path d="M-10 110 C 120 40, 240 150, 380 70 S 560 60, 620 30" stroke="#fff" stroke-width="2" stroke-dasharray="8 10" fill="none" stroke-linecap="round"/><circle cx="380" cy="70" r="6" fill="none" stroke="#fff" stroke-width="2"/><circle cx="380" cy="70" r="2" fill="#fff"/></svg>
+        </div>
+        <a class="cubre" href="https://logistica.grupodtodo.com" data-destino="transporte" aria-label="Ir a Transporte D Todo"></a>
+        <div class="marca">
+          <svg viewBox="0 0 160 56" fill="none" role="img" aria-label="Transporte D Todo">
+            <text x="2" y="10" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="8.6" font-weight="700" letter-spacing="4.2">TRANSPORTE</text>
+            <text x="0" y="39" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="31" font-weight="800" letter-spacing="-1">D Todo</text>
+            <path d="M112 34 H136" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+            <circle cx="146" cy="34" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="146" cy="34" r="1.4" fill="#fff"/>
+          </svg>
+          <span class="tag">Logística y fletes</span>
+        </div>
+        <h2>Entregas de norte a sur y de oriente a occidente.</h2>
+        <p class="desc">Fletes empresariales y distribución de mercancía en todo El Salvador. Sigue cada envío en línea con su código de rastreo y la ubicación del camión en vivo.</p>
+        <div class="lineas"><span>Fletes empresariales</span><span>Distribución</span><span>Rastreo en línea</span><span>Cobertura nacional</span></div>
+        <div class="pie">
+          <div class="tel">Cotiza hoy<b>+503 7593 7814</b></div>
+          <a class="btn" href="https://logistica.grupodtodo.com" data-destino="transporte">Ir a Transporte <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="grupo" id="grupo">
+  <div class="wrap">
+    <div class="cab">
+      <div>
+        <div class="eyebrow-s">El grupo</div>
+        <h2>Producimos, <em class="d">abastecemos</em> y <em class="t">movemos</em>.</h2>
+      </div>
+      <p>Una sola familia empresarial salvadoreña cubre la cadena completa: el producto nace en nuestra granja, se despacha desde nuestra bodega mayorista y llega a tu puerta en nuestra propia flota. Menos intermediarios, más control y un solo responsable de principio a fin.</p>
+    </div>
+    <div class="cadena">
+      <div class="paso paso--d">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c4.4 0 8-4 8-9.5S15.5 2 12 2 4 7 4 12.5 7.6 22 12 22Z"/></svg></div>
+        <small>Distribuidora D Todo</small>
+        <h3>Granja propia</h3>
+        <p>Huevos de recolección diaria, clasificados por tamaño, sin intermediarios.</p>
+      </div>
+      <div class="paso paso--d">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5V20H3Z"/><path d="M3 9.5h18"/><path d="M9 20v-6h6v6"/></svg></div>
+        <small>Distribuidora D Todo</small>
+        <h3>Bodega mayorista</h3>
+        <p>Harinas de trigo y arroz y aceites comerciales por quintal, fardo, caja y bidón.</p>
+      </div>
+      <div class="paso paso--t">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
+        <small>Transporte D Todo</small>
+        <h3>Flota propia</h3>
+        <p>Camiones de caja para fletes empresariales y distribución en los 14 departamentos.</p>
+      </div>
+      <div class="paso paso--t">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <small>Transporte D Todo</small>
+        <h3>Rastreo en línea</h3>
+        <p>Cada envío tiene un código. Lo escribes y ves su estado y la ubicación del camión.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow-s" style="color:var(--ink-fg-2)">Contacto directo</div>
+      <h2>Habla con la empresa que necesitas.</h2>
+      <p>Cada empresa atiende sus propios pedidos y cotizaciones. Escríbeles o llámalos directamente.</p>
+    </div>
+    <div class="tarjeta tarjeta--d">
+      <div class="quien"><i aria-hidden="true"></i>Distribuidora D Todo · Pedidos</div>
+      <div class="num">+503 7027 4503</div>
+      <div class="acciones">
+        <a class="p" href="https://wa.me/50370274503?text=Hola%20Distribuidora%20D%20Todo%2C%20quiero%20cotizar." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp</a>
+        <a href="tel:+50370274503"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>Llamar</a>
+      </div>
+    </div>
+    <div class="tarjeta tarjeta--t">
+      <div class="quien"><i aria-hidden="true"></i>Transporte D Todo · Cotizaciones</div>
+      <div class="num">+503 7593 7814</div>
+      <div class="acciones">
+        <a class="p" href="https://wa.me/50375937814?text=Hola%20Transporte%20D%20Todo%2C%20quiero%20cotizar%20un%20flete." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp</a>
+        <a href="tel:+50375937814"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>Llamar</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="anio">2026</span> Grupo D Todo. Todos los derechos reservados.</span>
+    <nav aria-label="Empresas del grupo">
+      <a href="https://distribuidora.grupodtodo.com" data-destino="distribuidora">Distribuidora D Todo</a>
+      <a href="https://logistica.grupodtodo.com" data-destino="transporte">Transporte D Todo</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  // Direcciones de cada empresa. Cuando se decida dónde queda cada página,
+  // basta con cambiar estas dos líneas (ver README.md).
+  var DESTINOS = {
+    distribuidora: 'https://distribuidora.grupodtodo.com',
+    transporte:    'https://logistica.grupodtodo.com'
+  };
+  var enlaces = document.querySelectorAll('[data-destino]');
+  for (var i = 0; i < enlaces.length; i++) {
+    var destino = DESTINOS[enlaces[i].getAttribute('data-destino')];
+    if (destino) enlaces[i].setAttribute('href', destino);
+  }
+  var anio = document.getElementById('anio');
+  if (anio) anio.textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
