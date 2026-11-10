@@ -51,3 +51,21 @@ propio panel; con eso emite el certificado HTTPS automáticamente.
   definitivo (su propio README lo indica).
 - Agregar una imagen `og-image.jpg` de 1200×630 si se quiere vista previa al
   compartir el enlace en WhatsApp o redes.
+
+## Logotipos (carpeta `assets/`)
+
+Los tres logotipos se vectorizaron a partir de las imágenes originales para
+que se vean nítidos en cualquier tamaño y pantalla:
+
+| Archivo                    | Uso                                                        |
+|----------------------------|------------------------------------------------------------|
+| `logo-grupo.svg`           | Logotipo del grupo (negro + elipse naranja) sobre blanco   |
+| `logo-distribuidora.svg`   | Distribuidora D Todo. Toma el color del texto (`currentColor`): blanco sobre naranja o naranja sobre blanco |
+| `logo-transporte.svg`      | Transporte D Todo. Igual, con `currentColor`               |
+| `elipse.svg`               | Solo la elipse del grupo, para usarla como detalle gráfico |
+| `favicon.svg`              | Icono de pestaña                                           |
+
+Colores de marca tomados de los logotipos: grupo `#EB9938`, Distribuidora
+`#F18711`, Transporte `#0056A1`. En `index.html` los logotipos van embebidos
+para que la página sea un solo archivo; los SVG de `assets/` sirven para
+reutilizarlos en las otras dos páginas.
