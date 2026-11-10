@@ -84,13 +84,18 @@ async function sembrar(almacen) {
 
 // ---------- Utilidades ----------
 async function todosLosViajes(almacen) {
+  await asegurarSemilla(almacen);
   const claves = await almacen.claves('viaje/');
-  if (claves.length === 0) { await sembrar(almacen); return todosLosViajes(almacen); }
   const viajes = await Promise.all(claves.map(k => almacen.leer(k)));
   return viajes.filter(Boolean);
 }
 
+async function asegurarSemilla(almacen) {
+  if ((await almacen.claves('viaje/')).length === 0) await sembrar(almacen);
+}
+
 async function obtenerViaje(almacen, idOcodigo) {
+  await asegurarSemilla(almacen);
   const porCodigo = await almacen.leer(claveViaje(idOcodigo));
   if (porCodigo) return porCodigo;
   const n = Number(idOcodigo);
@@ -179,7 +184,9 @@ export default async function manejar(req) {
   }
 
   if (partes[0] === 'viajes' && partes.length >= 2) {
-    const viaje = await obtenerViaje(almacen, decodeURIComponent(partes[1]));
+    let codigoPedido = partes[1];
+    try { codigoPedido = decodeURIComponent(partes[1]); } catch (e) { return error('Código inválido', 400); }
+    const viaje = await obtenerViaje(almacen, codigoPedido);
     if (!viaje) return error('Viaje no encontrado', 404);
 
     if (metodo === 'GET' && partes.length === 2) return json({ viaje: sinEventos(viaje), eventos: viaje.eventos });
