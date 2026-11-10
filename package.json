@@ -1,0 +1,8 @@
+{
+  "name": "grupo-d-todo",
+  "private": true,
+  "description": "Sitios web de Grupo D Todo (hub, Distribuidora D Todo y Transporte D Todo) y API de rastreo, desplegados en Netlify.",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

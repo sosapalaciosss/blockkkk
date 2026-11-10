@@ -1,71 +1,106 @@
-# Grupo D Todo · grupodtodo.com
+# Grupo D Todo · sitios web
 
-Landing page del grupo. Es una sola página estática (`index.html`) que presenta
-al grupo y reparte a cada visitante hacia una de las dos empresas:
+Este repositorio contiene **todo** el conjunto web de Grupo D Todo y se publica
+en Netlify como un solo sitio que atiende tres dominios:
 
-| Empresa               | Qué hace                                         | Dirección prevista                 |
-|-----------------------|--------------------------------------------------|------------------------------------|
-| Distribuidora D Todo  | Huevos de granja propia, harinas y aceites (B2B) | `distribuidora.grupodtodo.com`     |
-| Transporte D Todo     | Fletes, distribución y rastreo de envíos         | `logistica.grupodtodo.com`         |
+| Dominio                        | Carpeta                | Qué es                                              |
+|--------------------------------|------------------------|-----------------------------------------------------|
+| `grupodtodo.com`               | `sites/grupo/`         | Hub del grupo: reparte hacia las dos empresas       |
+| `distribuidora.grupodtodo.com` | `sites/distribuidora/` | Distribuidora D Todo                                |
+| `logistica.grupodtodo.com`     | `sites/transporte/`    | Transporte D Todo + plataforma de rastreo de envíos |
 
-No necesita servidor ni dependencias: cualquier hosting que sirva archivos
-estáticos la publica tal cual (Netlify, Vercel, Cloudflare Pages, GitHub Pages,
-o el mismo servidor Node de Transporte D Todo si se prefiere).
+La API de rastreo (`/api/...` en `logistica.grupodtodo.com`) vive en
+`netlify/functions/api.mjs` y guarda los viajes en **Netlify Blobs**, el
+almacenamiento integrado de Netlify. No hace falta servidor ni base de datos
+aparte.
 
-## Cómo cambiar a dónde apunta cada botón
+## Publicar en Netlify (primera vez)
 
-Al final de `index.html` hay un bloque con las dos direcciones:
+1. En Netlify: **Add new site → Import an existing project → GitHub** y elige
+   este repositorio y la rama que quieras publicar. Netlify lee `netlify.toml`
+   y configura solo la carpeta a publicar (`sites`) y las funciones. No hay que
+   escribir ningún comando de build.
+2. Espera el primer deploy. Verás el hub en la dirección `*.netlify.app` que
+   te asigne Netlify. En esa misma dirección puedes revisar las otras dos
+   páginas en `/distribuidora/` y `/transporte/`, y la API en `/api/salud`.
+3. **Dominios.** En *Domain management → Add a domain* agrega, al mismo sitio:
+   - `grupodtodo.com` (márcalo como dominio principal)
+   - `www.grupodtodo.com`
+   - `distribuidora.grupodtodo.com`
+   - `logistica.grupodtodo.com`
+4. **DNS.** Lo más simple es usar Netlify DNS: al agregar `grupodtodo.com`,
+   Netlify te ofrece gestionar el DNS y te da los nameservers para ponerlos
+   donde compraste el dominio. Con eso los subdominios quedan configurados
+   solos. Si prefieres dejar el DNS en tu registrador, crea estos registros:
 
-```js
-var DESTINOS = {
-  logistica:     'https://logistica.grupodtodo.com',
-  distribuidora: 'https://distribuidora.grupodtodo.com'
-};
+   | Tipo  | Nombre          | Valor                          |
+   |-------|-----------------|--------------------------------|
+   | A     | `@`             | `75.2.60.5`                    |
+   | CNAME | `www`           | `TU-SITIO.netlify.app`         |
+   | CNAME | `distribuidora` | `TU-SITIO.netlify.app`         |
+   | CNAME | `logistica`     | `TU-SITIO.netlify.app`         |
+
+5. Netlify emite el certificado HTTPS para los cuatro dominios en unos
+   minutos (*Domain management → HTTPS*). Listo: cada dominio sirve su carpeta.
+
+A partir de ahí, **cada push a la rama conectada publica solo**.
+
+### Variables de entorno (opcionales)
+
+En *Site configuration → Environment variables*:
+
+| Variable             | Para qué                                                                 |
+|----------------------|--------------------------------------------------------------------------|
+| `CLAVE_ADMIN`        | Si la defines, crear viajes y recargar datos de ejemplo exigen el encabezado `x-clave` con ese valor. Recomendado. |
+| `UMBRAL_ALERTA_MIN`  | Minutos sin cambios para marcar un viaje como atascado en el panel. Por defecto 60. |
+
+## La plataforma de rastreo
+
+Las vistas son las mismas de antes: `logistica.grupodtodo.com/cliente.html`
+(seguimiento), `/conductor.html` (avanza estados y envía ubicación) y
+`/panel.html` (panel del dueño). La primera vez que alguien consulta la API se
+cargan solos los tres viajes de ejemplo (`TRK-1001`, `TRK-1002`, `TRK-1003`).
+
+Crear un viaje real:
+
+```bash
+curl -X POST https://logistica.grupodtodo.com/api/viajes \
+  -H "content-type: application/json" -H "x-clave: TU_CLAVE" \
+  -d '{"cliente":"Panadería Luna","origen":"San Salvador","destino":"Ahuachapán","conductor":"Mario Pérez"}'
 ```
 
-Se cambian ahí y todos los enlaces de la página (tarjetas, botones y pie)
-se actualizan solos. Los `href` del HTML llevan las mismas direcciones como
-respaldo por si el navegador no ejecuta JavaScript.
+Devuelve el código asignado (`TRK-1004`, `TRK-1005`, …) o puedes mandar tu
+propio `"codigo"`. Para volver a los datos de ejemplo:
+`POST /api/semilla` con el mismo encabezado.
 
-## Cómo conectar las tres páginas con un solo dominio
+Las rutas de la API están documentadas al inicio de `netlify/functions/api.mjs`.
+Probarla sin Netlify: `node pruebas/api.test.mjs` (usa memoria en vez de Blobs).
 
-Con un único dominio comprado (`grupodtodo.com`) se publican las tres páginas
-usando subdominios. Los subdominios no tienen costo adicional; se crean en el
-panel de DNS del mismo proveedor donde se compra el dominio.
+## Cómo hacer cambios
 
-1. **Landing del grupo** → `grupodtodo.com` y `www.grupodtodo.com`
-   Apuntan al hosting donde se suba este `index.html`.
-2. **Distribuidora** → `distribuidora.grupodtodo.com`
-   Registro `CNAME` apuntando al hosting donde esté publicada su página.
-3. **Transporte / Logística** → `logistica.grupodtodo.com`
-   Registro `CNAME` (o `A` si es un servidor propio) apuntando a donde corra la
-   plataforma de trazabilidad.
+- **Hub del grupo**: `sites/grupo/index.html`. Las direcciones de cada empresa
+  están en el bloque `DESTINOS` al final del archivo.
+- **Distribuidora**: `sites/distribuidora/index.html`, un solo archivo con todo
+  (estilos, logotipo y cotizador).
+- **Transporte**: `sites/transporte/index.html` es la página pública; las otras
+  tres son la plataforma. `marca.css` es la hoja de estilos compartida.
+- **Logotipos**: `sites/grupo/assets/` tiene los tres en vector (SVG). Los
+  colores de marca son grupo `#EB9938`, Distribuidora `#F18711` y Transporte
+  `#0056A1`.
+- **Imágenes para compartir** (WhatsApp, redes): cada carpeta tiene su
+  `og-image.png` de 1200×630.
 
-Cada hosting pide además que se le "agregue el dominio personalizado" desde su
-propio panel; con eso emite el certificado HTTPS automáticamente.
+## SEO
 
-## Pendientes antes de publicar
+Cada empresa tiene su propio dominio, título, descripción, datos estructurados
+(`schema.org`), `robots.txt`, `sitemap.xml` y `llms.txt`, para que en Google y
+en los asistentes de IA aparezca **la página de la empresa**, no el hub:
 
-- Confirmar los nombres finales de los subdominios (arriba son una propuesta).
-- Reemplazar `TU-DOMINIO.com` en la página de la Distribuidora por su subdominio
-  definitivo (su propio README lo indica).
-- Agregar una imagen `og-image.jpg` de 1200×630 si se quiere vista previa al
-  compartir el enlace en WhatsApp o redes.
+- Distribuidora: "distribuidora mayorista", "huevos al por mayor", "harina de
+  trigo por quintal", "proveedor para panaderías", etc.
+- Transporte: "transporte de carga El Salvador", "empresa de logística",
+  "fletes empresariales", "distribución de mercancía", etc.
 
-## Logotipos (carpeta `assets/`)
-
-Los tres logotipos se vectorizaron a partir de las imágenes originales para
-que se vean nítidos en cualquier tamaño y pantalla:
-
-| Archivo                    | Uso                                                        |
-|----------------------------|------------------------------------------------------------|
-| `logo-grupo.svg`           | Logotipo del grupo (negro + elipse naranja) sobre blanco   |
-| `logo-distribuidora.svg`   | Distribuidora D Todo. Toma el color del texto (`currentColor`): blanco sobre naranja o naranja sobre blanco |
-| `logo-transporte.svg`      | Transporte D Todo. Igual, con `currentColor`               |
-| `elipse.svg`               | Solo la elipse del grupo, para usarla como detalle gráfico |
-| `favicon.svg`              | Icono de pestaña                                           |
-
-Colores de marca tomados de los logotipos: grupo `#EB9938`, Distribuidora
-`#F18711`, Transporte `#0056A1`. En `index.html` los logotipos van embebidos
-para que la página sea un solo archivo; los SVG de `assets/` sirven para
-reutilizarlos en las otras dos páginas.
+Después de publicar, registra los tres dominios en **Google Search Console** y
+envía cada `sitemap.xml`. Las vistas internas de la plataforma (`panel.html`,
+`conductor.html`) llevan `noindex`.

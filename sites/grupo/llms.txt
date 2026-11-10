@@ -1,0 +1,10 @@
+# Grupo D Todo
+
+> Grupo empresarial de El Salvador: infraestructura, logística y distribución comercial centralizada. Reúne dos empresas con sus propios sitios web.
+
+## Empresas
+- Distribuidora D Todo (https://distribuidora.grupodtodo.com/): distribuidora mayorista de alimentos con granja avícola propia. Huevos frescos, harina de trigo, harina de arroz y aceites vegetales para panaderías, pupuserías, restaurantes, hoteles y mayoristas. Pedidos por WhatsApp: +503 7027 4503.
+- Transporte D Todo, también llamada Logística D Todo (https://logistica.grupodtodo.com/): empresa de transporte de carga y logística con flota propia, fletes empresariales, distribución de mercancía y rastreo de envíos en línea. Cotizaciones: +503 7593 7814.
+
+## Para consultas
+Cada empresa atiende directamente sus pedidos y cotizaciones en los números anteriores. El sitio del grupo (https://grupodtodo.com/) solo reparte hacia cada empresa.

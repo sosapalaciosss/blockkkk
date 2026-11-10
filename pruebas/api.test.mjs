@@ -1,0 +1,25 @@
+import manejar, { TRIP_STATES } from '../netlify/functions/api.mjs';
+const base = 'https://logistica.grupodtodo.com';
+const pedir = async (metodo, ruta, cuerpo, cab = {}) => {
+  const r = await manejar(new Request(base + ruta, { method: metodo, headers: { 'content-type': 'application/json', ...cab }, body: cuerpo ? JSON.stringify(cuerpo) : undefined }));
+  return { estado: r.status, datos: await r.json() };
+};
+const ok = (cond, msg) => { console.log((cond ? 'OK  ' : 'FALLA ') + msg); if (!cond) process.exitCode = 1; };
+let r = await pedir('GET', '/api/salud'); ok(r.estado === 200 && r.datos.viajes === 3, 'salud y semilla automática: ' + JSON.stringify(r.datos));
+r = await pedir('GET', '/api/estados'); ok(r.datos.estados.length === 4, 'estados');
+r = await pedir('GET', '/.netlify/functions/api/viajes'); ok(r.datos.viajes.length === 3 && !r.datos.viajes[0].eventos, 'lista de viajes por ruta de función');
+r = await pedir('GET', '/api/viajes/trk-1001'); ok(r.estado === 200 && r.datos.viaje.codigo === 'TRK-1001' && r.datos.eventos.length === 3, 'viaje por código (minúsculas)');
+r = await pedir('GET', '/api/viajes/2'); ok(r.datos.viaje.codigo === 'TRK-1002', 'viaje por id numérico');
+r = await pedir('GET', '/api/viajes/NOEXISTE'); ok(r.estado === 404, '404 viaje inexistente');
+r = await pedir('GET', '/api/panel'); ok(r.datos.en_alerta === 1 && r.datos.activos === 2 && r.datos.finalizados === 1 && r.datos.viajes[0].minutos_inactivo >= 179, 'panel: alerta de TRK-1003 ' + JSON.stringify({a: r.datos.activos, f: r.datos.finalizados, al: r.datos.en_alerta}));
+r = await pedir('POST', '/api/viajes/TRK-1001/eventos', { estado: 'Inicio de carga' }); ok(r.estado === 400, 'no se puede retroceder');
+r = await pedir('POST', '/api/viajes/TRK-1001/eventos', { estado: 'Llegada al destino', nota: 'Entregado' }); ok(r.estado === 200 && r.datos.viaje.estado_actual === 'Llegada al destino' && r.datos.eventos.length === 4, 'avanzar estado');
+r = await pedir('POST', '/api/viajes/TRK-1003/ubicacion', { lat: 13.7, lng: -89.2 }); ok(r.estado === 200, 'guardar ubicación');
+r = await pedir('GET', '/api/viajes/TRK-1003'); ok(r.datos.viaje.lat === 13.7 && r.datos.viaje.ubicacion_en, 'ubicación guardada');
+r = await pedir('POST', '/api/viajes/TRK-1003/ubicacion', { lat: 'x', lng: 1 }); ok(r.estado === 400, 'coordenadas inválidas');
+r = await pedir('POST', '/api/viajes', { cliente: 'Panadería Luna', origen: 'San Salvador', destino: 'Ahuachapán', conductor: 'Mario' }); ok(r.estado === 201 && r.datos.viaje.codigo === 'TRK-1004' && r.datos.viaje.id === 4, 'crear viaje: ' + r.datos.viaje?.codigo);
+r = await pedir('POST', '/api/viajes', { cliente: 'X' }); ok(r.estado === 400, 'crear viaje sin campos');
+r = await pedir('GET', '/api/viajes/TRK-1004'); ok(r.datos.viaje.estado_actual === 'Pendiente' && r.datos.eventos.length === 1, 'viaje nuevo consultable');
+r = await pedir('POST', '/api/semilla'); ok(r.estado === 200, 'resembrar');
+r = await pedir('GET', '/api/salud'); ok(r.datos.viajes === 3, 'tras resembrar quedan 3');
+r = await pedir('GET', '/api/otra'); ok(r.estado === 404, '404 ruta desconocida');

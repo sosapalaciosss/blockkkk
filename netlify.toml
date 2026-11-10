@@ -1,0 +1,74 @@
+# Grupo D Todo · un solo sitio de Netlify sirve los tres dominios.
+#
+#   grupodtodo.com                -> sites/grupo         (hub del grupo)
+#   distribuidora.grupodtodo.com  -> sites/distribuidora (Distribuidora D Todo)
+#   logistica.grupodtodo.com      -> sites/transporte    (Transporte D Todo + API de rastreo)
+#
+# Los tres dominios se agregan al mismo sitio en Netlify (Domain management).
+# Ver README.md para los pasos.
+
+[build]
+  publish = "sites"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# --- API de rastreo (función) ---------------------------------------------
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+# --- Dominio del grupo ------------------------------------------------------
+[[redirects]]
+  from = "https://www.grupodtodo.com/*"
+  to = "https://grupodtodo.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://grupodtodo.com/*"
+  to = "/grupo/:splat"
+  status = 200
+  force = true
+
+# --- Distribuidora ----------------------------------------------------------
+[[redirects]]
+  from = "https://distribuidora.grupodtodo.com/*"
+  to = "/distribuidora/:splat"
+  status = 200
+  force = true
+
+# --- Transporte / logística -------------------------------------------------
+[[redirects]]
+  from = "https://logistica.grupodtodo.com/*"
+  to = "/transporte/:splat"
+  status = 200
+  force = true
+
+# --- Cualquier otro dominio (por ejemplo el *.netlify.app de pruebas) -------
+# Muestra el hub en la raíz y permite ver cada página en /distribuidora/ y /transporte/.
+[[redirects]]
+  from = "/"
+  to = "/grupo/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/assets/*"
+  to = "/grupo/assets/:splat"
+  status = 200
+
+# --- Cabeceras --------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/*/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

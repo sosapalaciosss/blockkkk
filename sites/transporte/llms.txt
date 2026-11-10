@@ -1,0 +1,20 @@
+# Transporte D Todo
+
+> Empresa de transporte de carga y logística en El Salvador, con flota propia y rastreo de envíos en línea. Parte de Grupo D Todo. También conocida como Logística D Todo.
+
+Transporte D Todo mueve mercancía a cualquier punto de El Salvador, de norte a sur y de oriente a occidente. Ofrece fletes empresariales dedicados, distribución de mercancía y rutas programadas con camiones de caja propios. Cada envío tiene un código con el que el cliente ve su estado y la ubicación del camión en línea.
+
+## Servicios
+- Fletes empresariales: transporte dedicado para empresas, con rutas programadas y flota propia.
+- Distribución de mercancía: entregas en los 14 departamentos de El Salvador.
+- Rastreo de envíos: estados Pendiente, Inicio de carga, En ruta y Llegada al destino, con ubicación del camión en el mapa.
+
+## Contacto
+- Teléfono y WhatsApp para cotizaciones: +503 7593 7814
+- Rastreo de envíos: https://logistica.grupodtodo.com/cliente.html
+- País: El Salvador
+
+## Enlaces
+- Sitio: https://logistica.grupodtodo.com/
+- Grupo: https://grupodtodo.com/
+- Empresa hermana de distribución mayorista de alimentos: https://distribuidora.grupodtodo.com/
