@@ -18,8 +18,8 @@ Al final de `index.html` hay un bloque con las dos direcciones:
 
 ```js
 var DESTINOS = {
-  distribuidora: 'https://distribuidora.grupodtodo.com',
-  transporte:    'https://logistica.grupodtodo.com'
+  logistica:     'https://logistica.grupodtodo.com',
+  distribuidora: 'https://distribuidora.grupodtodo.com'
 };
 ```
 
