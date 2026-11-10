@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Grupo D Todo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Grupo D Todo. Infraestructura, logística y distribución comercial centralizada en El Salvador. Accede a Logística y Transporte o a Distribuidora D Todo.">
-<meta name="theme-color" content="#000000">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://grupodtodo.com/">
 <meta property="og:type" content="website">
@@ -16,39 +16,49 @@
 <meta property="og:title" content="Grupo D Todo">
 <meta property="og:description" content="Infraestructura, logística y distribución comercial centralizada.">
 <meta property="og:url" content="https://grupodtodo.com/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='43' text-anchor='middle' fill='%23fff' font-family='Inter,Arial,sans-serif' font-size='32' font-weight='800'%3ED%3C/text%3E%3Crect x='20' y='50' width='24' height='3' rx='1.5' fill='%232CFF7A'/%3E%3C/svg%3E">
+<meta property="og:image" content="https://grupodtodo.com/logo.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fff'/%3E%3Cellipse cx='32' cy='32' rx='27' ry='13' fill='none' stroke='%23EB9938' stroke-width='5' stroke-dasharray='42 30' transform='rotate(-30 32 32)'/%3E%3Ctext x='32' y='42' text-anchor='middle' fill='%23111' font-family='Inter,Arial,sans-serif' font-size='28' font-weight='800'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script>
   tailwind.config = {
-    darkMode: 'class',
     theme: {
       extend: {
-        colors: { neon: '#2CFF7A', ink: '#000000', mist: '#A1A1AA' },
-        fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] },
-        boxShadow: { neon: '0 0 0 1px #2CFF7A, 0 0 32px -4px rgba(44,255,122,.45)' }
+        colors: { brand: '#EB9938', ink: '#111111', mist: '#6B6B6B', line: '#E8E8E8' },
+        fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] }
       }
     }
   }
 </script>
 <style>
-  /* Identidad: negro absoluto, blanco limpio, verde neón solo en bordes, hover y detalles. */
-  :root { color-scheme: dark; --bg:#000000; --fg:#ffffff; --fg-2:#a1a1aa; --line:rgba(255,255,255,.12); --neon:#2CFF7A; }
+  /* Identidad: blanco limpio, negro del logotipo y el naranja de su elipse como único acento. */
+  :root { color-scheme: light; --bg:#ffffff; --fg:#111111; --fg-2:#6b6b6b; --line:#e8e8e8; --brand:#EB9938; }
   html { background: var(--bg); }
-  body { background: var(--bg); color: var(--fg); font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--fg); font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   .gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-  .puerta { border: 1px solid var(--line); transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
-  .puerta:hover, .puerta:focus-visible { border-color: var(--neon); box-shadow: 0 0 0 1px var(--neon), 0 0 36px -6px rgba(44,255,122,.5); transform: translateY(-2px); outline: none; }
+
+  /* Elipse del logotipo, en grande, detrás de todo el hub. Dos arcos opuestos, como en la marca. */
+  .orbita { position: absolute; left: 50%; top: 50%; width: min(150vw, 1500px); height: auto; transform: translate(-50%, -50%); pointer-events: none; z-index: 0; }
+  .orbita ellipse { fill: none; stroke: var(--brand); stroke-linecap: round; }
+  .orbita .trazo { stroke-width: 14; stroke-dasharray: 560 760; stroke-dashoffset: -80; opacity: .14; }
+  .orbita .fino { stroke-width: 1.5; opacity: .35; }
+
+  .puerta { position: relative; border: 1px solid var(--line); background: rgba(255,255,255,.92); transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; overflow: hidden; }
+  .puerta:hover, .puerta:focus-visible { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand), 0 18px 44px -18px rgba(235,153,56,.55); transform: translateY(-3px); outline: none; }
+  /* Pequeño arco en la esquina de cada tarjeta, se enciende al pasar el cursor. */
+  .puerta .arco { position: absolute; right: -70px; top: -90px; width: 220px; height: 220px; pointer-events: none; }
+  .puerta .arco ellipse { fill: none; stroke: var(--brand); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 150 400; opacity: .18; transition: opacity .25s ease, stroke-dashoffset .4s ease; }
+  .puerta:hover .arco ellipse, .puerta:focus-visible .arco ellipse { opacity: .7; stroke-dashoffset: -40; }
   .puerta .flecha { transition: transform .25s ease, color .25s ease; }
-  .puerta:hover .flecha, .puerta:focus-visible .flecha { transform: translate(3px,-3px); color: var(--neon); }
-  .puerta:hover .ingresar, .puerta:focus-visible .ingresar { color: var(--neon); }
-  .punto { box-shadow: 0 0 0 0 rgba(44,255,122,.6); animation: pulso 2s infinite; }
-  @keyframes pulso { 70% { box-shadow: 0 0 0 7px rgba(44,255,122,0); } 100% { box-shadow: 0 0 0 0 rgba(44,255,122,0); } }
-  a:focus-visible { outline: 2px solid var(--neon); outline-offset: 4px; }
+  .puerta:hover .flecha, .puerta:focus-visible .flecha { transform: translate(3px,-3px); color: var(--brand); }
+  .puerta:hover .ingresar, .puerta:focus-visible .ingresar { color: var(--brand); }
+  .punto { box-shadow: 0 0 0 0 rgba(235,153,56,.6); animation: pulso 2s infinite; }
+  @keyframes pulso { 70% { box-shadow: 0 0 0 7px rgba(235,153,56,0); } 100% { box-shadow: 0 0 0 0 rgba(235,153,56,0); } }
+  a:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   @media (prefers-reduced-motion: reduce) {
-    .puerta, .puerta .flecha { transition: none; }
+    .puerta, .puerta .flecha, .puerta .arco ellipse { transition: none; }
     .puerta:hover { transform: none; }
     .punto { animation: none; }
   }
@@ -56,44 +66,53 @@
 </head>
 <body class="min-h-[100dvh] flex flex-col">
 
-<main class="flex-1 flex flex-col items-center justify-center gutter py-16 sm:py-24">
-  <div class="w-full max-w-4xl flex flex-col items-center text-center">
+<main class="relative flex-1 flex flex-col items-center justify-center gutter py-14 sm:py-24">
 
-    <!-- Logotipo tipográfico -->
-    <a href="#" aria-label="Grupo D Todo" class="flex flex-col items-center leading-none select-none">
-      <span class="text-[11px] sm:text-xs font-semibold tracking-[0.45em] uppercase text-mist pl-[0.45em]">Grupo</span>
-      <span class="mt-2 text-5xl sm:text-7xl font-extrabold tracking-[-0.04em] text-white">D TODO</span>
-      <span aria-hidden="true" class="mt-5 block h-px w-10 bg-neon"></span>
+  <!-- Órbita de fondo: la elipse del logotipo -->
+  <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+    <svg class="orbita" viewBox="0 0 1500 900">
+      <ellipse class="trazo" cx="750" cy="450" rx="620" ry="250" transform="rotate(-24 750 450)"/>
+      <ellipse class="fino"  cx="750" cy="450" rx="690" ry="300" transform="rotate(-24 750 450)"/>
+    </svg>
+  </div>
+
+  <div class="relative z-10 w-full max-w-4xl flex flex-col items-center text-center">
+
+    <!-- Logotipo -->
+    <a href="#" aria-label="Grupo D Todo" class="block select-none">
+      <img src="logo.jpg" alt="Grupo D Todo" width="737" height="649" class="w-[220px] sm:w-[300px] h-auto mx-auto" decoding="async">
     </a>
 
     <!-- Descripción -->
-    <p class="mt-6 text-sm sm:text-base text-mist tracking-wide max-w-md">Infraestructura, logística y distribución comercial centralizada.</p>
+    <p class="mt-4 sm:mt-6 text-sm sm:text-base text-mist tracking-wide max-w-md">Infraestructura, logística y distribución comercial centralizada.</p>
 
     <!-- Selector dual -->
-    <nav aria-label="Divisiones del grupo" class="mt-14 sm:mt-20 w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+    <nav aria-label="Divisiones del grupo" class="mt-12 sm:mt-16 w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
 
-      <a href="https://logistica.grupodtodo.com" data-destino="logistica" class="puerta group rounded-2xl bg-black p-6 sm:p-8 text-left flex flex-col gap-10 min-h-[220px] sm:min-h-[260px]">
-        <div class="flex items-center justify-between">
+      <a href="https://logistica.grupodtodo.com" data-destino="logistica" class="puerta group rounded-2xl p-6 sm:p-8 text-left flex flex-col gap-10 min-h-[220px] sm:min-h-[260px]">
+        <svg class="arco" viewBox="0 0 220 220" aria-hidden="true"><ellipse cx="110" cy="110" rx="100" ry="46" transform="rotate(-24 110 110)"/></svg>
+        <div class="relative flex items-center justify-between">
           <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-mist">División</span>
-          <svg class="flecha w-5 h-5 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+          <svg class="flecha w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
         </div>
-        <div class="mt-auto flex flex-col gap-2">
-          <span class="text-2xl sm:text-3xl font-extrabold tracking-[-0.03em] text-white">Logística y Transporte</span>
+        <div class="relative mt-auto flex flex-col gap-2">
+          <span class="text-2xl sm:text-3xl font-extrabold tracking-[-0.03em] text-ink">Logística y Transporte</span>
           <span class="text-sm text-mist">Fletes empresariales y rastreo de envíos en todo El Salvador.</span>
         </div>
-        <span class="ingresar inline-flex items-center gap-2 text-sm font-semibold text-white/80 tracking-wide">Ingresar <span class="punto inline-block w-1.5 h-1.5 rounded-full bg-neon" aria-hidden="true"></span></span>
+        <span class="ingresar relative inline-flex items-center gap-2 text-sm font-semibold text-ink/80 tracking-wide">Ingresar <span class="punto inline-block w-1.5 h-1.5 rounded-full bg-brand" aria-hidden="true"></span></span>
       </a>
 
-      <a href="https://distribuidora.grupodtodo.com" data-destino="distribuidora" class="puerta group rounded-2xl bg-black p-6 sm:p-8 text-left flex flex-col gap-10 min-h-[220px] sm:min-h-[260px]">
-        <div class="flex items-center justify-between">
+      <a href="https://distribuidora.grupodtodo.com" data-destino="distribuidora" class="puerta group rounded-2xl p-6 sm:p-8 text-left flex flex-col gap-10 min-h-[220px] sm:min-h-[260px]">
+        <svg class="arco" viewBox="0 0 220 220" aria-hidden="true"><ellipse cx="110" cy="110" rx="100" ry="46" transform="rotate(-24 110 110)"/></svg>
+        <div class="relative flex items-center justify-between">
           <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-mist">División</span>
-          <svg class="flecha w-5 h-5 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+          <svg class="flecha w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
         </div>
-        <div class="mt-auto flex flex-col gap-2">
-          <span class="text-2xl sm:text-3xl font-extrabold tracking-[-0.03em] text-white">Distribuidora D Todo</span>
+        <div class="relative mt-auto flex flex-col gap-2">
+          <span class="text-2xl sm:text-3xl font-extrabold tracking-[-0.03em] text-ink">Distribuidora D Todo</span>
           <span class="text-sm text-mist">Huevos de granja propia, harinas y aceites al por mayor.</span>
         </div>
-        <span class="ingresar inline-flex items-center gap-2 text-sm font-semibold text-white/80 tracking-wide">Ingresar <span class="punto inline-block w-1.5 h-1.5 rounded-full bg-neon" aria-hidden="true"></span></span>
+        <span class="ingresar relative inline-flex items-center gap-2 text-sm font-semibold text-ink/80 tracking-wide">Ingresar <span class="punto inline-block w-1.5 h-1.5 rounded-full bg-brand" aria-hidden="true"></span></span>
       </a>
 
     </nav>
@@ -101,7 +120,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="gutter pb-[calc(20px+env(safe-area-inset-bottom,0px))] pt-5 border-t border-white/10">
+<footer class="relative z-10 gutter pb-[calc(20px+env(safe-area-inset-bottom,0px))] pt-5 border-t border-line bg-white">
   <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-mist">
     <span>© <span id="anio">2026</span> Grupo D Todo. Todos los derechos reservados.</span>
     <span class="tracking-[0.2em] uppercase text-[10px]">El Salvador</span>
