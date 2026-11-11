@@ -107,7 +107,7 @@ envía cada `sitemap.xml`. Las vistas internas de la plataforma (`panel.html`,
 
 ## Fotos de la Distribuidora
 
-Las fotos de `sites/distribuidora/index.html` vienen de Unsplash (licencia
+Las fotos de `sites/distribuidora/index.html` y `sites/transporte/index.html` vienen de Unsplash (direcciones directas de images.unsplash.com) (licencia
 libre para uso comercial, sin atribución obligatoria). Si una foto deja de
 estar disponible, la página muestra el degradado naranja en su lugar. Para
 cambiarlas por fotos propias, basta con reemplazar el `src` de cada `<img>`

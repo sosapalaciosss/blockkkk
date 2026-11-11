@@ -60,6 +60,16 @@
   to = "/grupo/assets/:splat"
   status = 200
 
+[[redirects]]
+  from = "/robots.txt"
+  to = "/grupo/robots.txt"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/grupo/sitemap.xml"
+  status = 200
+
 # --- Cabeceras --------------------------------------------------------------
 [[headers]]
   for = "/*"
